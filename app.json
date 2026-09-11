@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "BaghChal",
+    "slug": "baghchal",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "baghchal",
+    "userInterfaceStyle": "automatic",
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": true },
+    "web": { "output": "static", "bundler": "metro" },
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.eedarijal.baghchal" },
+    "android": { "package": "com.eedarijal.baghchal" }
+  }
+}
