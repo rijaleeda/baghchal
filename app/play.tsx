@@ -22,7 +22,7 @@ export default function Play(){
  const [game,setGame]=useState<GameState>(initialState());
  const [selected,setSelected]=useState<number|null>(null);
  const {width}=useWindowDimensions();
- const size=Math.min(width-26,520), pad=28, step=(size-pad*2)/4;
+ const size=Math.min(Math.max(width-26,320),520), pad=28, step=(size-pad*2)/4;
  const legal=useMemo(()=>legalMoves(game,game.turn),[game]);
  const targets=selected!==null?movesFrom(game,selected):[];
  const computer=mode==='computer'&&game.turn!==humanSide&&!game.winner;
