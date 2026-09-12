@@ -8,7 +8,6 @@ import { colors } from '../theme';
 const lines:[number,number][]=[];
 for(let r=0;r<5;r++)for(let c=0;c<4;c++)lines.push([r*5+c,r*5+c+1]);
 for(let c=0;c<5;c++)for(let r=0;r<4;r++)lines.push([r*5+c,(r+1)*5+c]);
-// Traditional BaghChal diagonals: diagonal movement exists only from even-parity intersections.
 for(let r=0;r<4;r++)for(let c=0;c<4;c++){
   if((r+c)%2===0) lines.push([r*5+c,(r+1)*5+c+1]);
   if((r+c)%2===1) lines.push([r*5+c+1,(r+1)*5+c]);
@@ -26,10 +25,19 @@ export default function Play(){
  const legal=useMemo(()=>legalMoves(game,game.turn),[game]);
  const targets=selected!==null?movesFrom(game,selected):[];
  const computer=mode==='computer'&&game.turn!==humanSide&&!game.winner;
- useEffect(()=>{if(!computer)return;const t=setTimeout(()=>{const m=computerMove(game,difficulty);if(m)setGame(g=>applyMove(g,m));setSelected(null)},difficulty==='expert'?650:420);return()=>clearTimeout(t)},[computer,game,difficulty]);
+ useEffect(()=>{
+  if(!computer)return;
+  const t=setTimeout(()=>{
+    const m=computerMove(game,difficulty);
+    if(m)setGame(g=>applyMove(g,m));
+    setSelected(null);
+  },180);
+  return()=>clearTimeout(t);
+ },[computer,game,difficulty]);
  function reset(){setGame(initialState());setSelected(null)}
  function tap(i:number){if(computer||game.winner)return;if(mode==='computer'&&game.turn!==humanSide)return;const cell=game.board[i];if(game.turn==='goat'&&game.goatsPlaced<20){const m=legal.find(x=>x.from===null&&x.to===i);if(m)setGame(applyMove(game,m));return}const target=targets.find(x=>x.to===i);if(target){setGame(applyMove(game,target));setSelected(null);return}setSelected(cell===game.turn?i:null)}
- const turnLabel=game.winner?`${game.winner==='goat'?'Goats':'Tigers'} win!`:computer?'Computer is thinking…':`${game.turn==='goat'?'Goats':'Tigers'} to move`;
+ const thinking=computer?(difficulty==='expert'?'Bagh is thinking deeply…':difficulty==='hard'?'Computer is calculating…':'Computer is thinking…'):'';
+ const turnLabel=game.winner?`${game.winner==='goat'?'Goats':'Tigers'} win!`:computer?thinking:`${game.turn==='goat'?'Goats':'Tigers'} to move`;
  return <SafeAreaView style={s.page}><ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
   <View style={s.hero}>
    <View style={s.top}><Pressable style={s.circle} onPress={()=>router.back()}><Text style={s.circleText}>‹</Text></Pressable><View style={s.brand}><Text style={s.mountain}>▲  ⛰  ▲</Text><Text style={s.nepali}>बाघचाल</Text><Text style={s.english}>BAGHCHAL</Text><Text style={s.tag}>A timeless game from Nepal</Text></View><Pressable style={s.circle} onPress={reset}><Text style={s.circleText}>↻</Text></Pressable></View>
