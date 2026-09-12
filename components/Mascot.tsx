@@ -1,52 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { colors } from '../theme';
+import { View } from 'react-native';
+import { SvgXml } from 'react-native-svg';
 
 type Props={animal:'tiger'|'goat';size?:number};
 
+const tigerSvg=`<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><g><circle cx="27" cy="30" r="17" fill="#F57C00" stroke="#4A2A1C" stroke-width="5"/><circle cx="93" cy="30" r="17" fill="#F57C00" stroke="#4A2A1C" stroke-width="5"/><circle cx="27" cy="30" r="8" fill="#F7C9A0"/><circle cx="93" cy="30" r="8" fill="#F7C9A0"/><path d="M21 61 C21 30 39 16 60 16 C81 16 99 30 99 61 C99 91 82 107 60 107 C38 107 21 91 21 61Z" fill="#F57C00" stroke="#4A2A1C" stroke-width="4"/><path d="M51 20 L57 39 L63 20" fill="#2E211A"/><path d="M37 27 L44 45 L30 35" fill="#2E211A"/><path d="M83 27 L76 45 L90 35" fill="#2E211A"/><path d="M26 52 L43 58 L27 64" fill="#2E211A"/><path d="M94 52 L77 58 L93 64" fill="#2E211A"/><ellipse cx="43" cy="58" rx="13" ry="15" fill="#FFF9F1"/><ellipse cx="77" cy="58" rx="13" ry="15" fill="#FFF9F1"/><ellipse cx="44" cy="59" rx="7" ry="9" fill="#2A1B14"/><ellipse cx="76" cy="59" rx="7" ry="9" fill="#2A1B14"/><circle cx="46" cy="56" r="2.5" fill="#FFFFFF"/><circle cx="78" cy="56" r="2.5" fill="#FFFFFF"/><ellipse cx="60" cy="78" rx="27" ry="19" fill="#FFE3C2"/><path d="M54 71 Q60 66 66 71 Q60 78 54 71Z" fill="#7A392A"/><path d="M60 76 C57 83 50 84 47 80 M60 76 C63 83 70 84 73 80" fill="none" stroke="#4A2A1C" stroke-width="3" stroke-linecap="round"/><path d="M49 88 Q60 99 71 88" fill="#C62828" stroke="#4A2A1C" stroke-width="3"/></g></svg>`;
+
+const goatSvg=`<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><g><path d="M35 31 C19 18 20 4 33 5 C44 6 46 19 43 31" fill="#7A5336" stroke="#4A2A1C" stroke-width="4"/><path d="M85 31 C101 18 100 4 87 5 C76 6 74 19 77 31" fill="#7A5336" stroke="#4A2A1C" stroke-width="4"/><path d="M29 43 C14 35 5 43 13 53 C19 60 28 56 36 52" fill="#D78B75" stroke="#8A5B4B" stroke-width="3"/><path d="M91 43 C106 35 115 43 107 53 C101 60 92 56 84 52" fill="#D78B75" stroke="#8A5B4B" stroke-width="3"/><path d="M26 59 C26 31 42 19 60 19 C78 19 94 31 94 59 C94 91 79 108 60 108 C41 108 26 91 26 59Z" fill="#FFF2DF" stroke="#9B745A" stroke-width="4"/><path d="M49 22 Q54 10 60 21 Q66 8 71 22" fill="#FFF8EE"/><ellipse cx="44" cy="59" rx="13" ry="15" fill="#FFFFFF"/><ellipse cx="76" cy="59" rx="13" ry="15" fill="#FFFFFF"/><ellipse cx="44" cy="60" rx="7" ry="9" fill="#2A1B14"/><ellipse cx="76" cy="60" rx="7" ry="9" fill="#2A1B14"/><circle cx="46" cy="57" r="2.5" fill="#FFFFFF"/><circle cx="78" cy="57" r="2.5" fill="#FFFFFF"/><ellipse cx="60" cy="80" rx="24" ry="18" fill="#F5D8C4"/><path d="M54 72 Q60 68 66 72 Q60 78 54 72Z" fill="#8B5D54"/><path d="M60 77 C57 84 51 85 48 81 M60 77 C63 84 69 85 72 81" fill="none" stroke="#553A31" stroke-width="3" stroke-linecap="round"/><path d="M51 89 Q60 98 69 89" fill="#C95B48" stroke="#553A31" stroke-width="3"/></g></svg>`;
+
 export function Mascot({animal,size=96}:Props){
-  const scale=size/96;
-  return <View style={{width:size,height:size,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
-    <View style={[s.canvas,{transform:[{scale}]}]}>
-      {animal==='tiger'?<Tiger/>:<Goat/>}
-    </View>
+  return <View style={{width:size,height:size,backgroundColor:'transparent',alignItems:'center',justifyContent:'center'}}>
+    <SvgXml xml={animal==='tiger'?tigerSvg:goatSvg} width={size} height={size}/>
   </View>;
 }
-
-function Tiger(){
-  return <>
-    <View style={[s.tEar,s.tEarL]}/><View style={[s.tEar,s.tEarR]}/>
-    <View style={s.tHead}>
-      <View style={[s.stripe,{top:7,left:34}]}/>
-      <View style={[s.stripe,{top:13,left:22,transform:[{rotate:'-24deg'}]}]}/>
-      <View style={[s.stripe,{top:13,right:22,transform:[{rotate:'24deg'}]}]}/>
-      <View style={[s.eye,{left:16}]}><View style={s.pupil}/></View>
-      <View style={[s.eye,{right:16}]}><View style={s.pupil}/></View>
-      <View style={s.muzzle}><View style={s.nose}/><Text style={s.smile}>⌣</Text></View>
-    </View>
-  </>;
-}
-
-function Goat(){
-  return <>
-    <View style={[s.horn,s.hornL]}/><View style={[s.horn,s.hornR]}/>
-    <View style={[s.gEar,s.gEarL]}/><View style={[s.gEar,s.gEarR]}/>
-    <View style={s.gHead}>
-      <View style={s.tuft}/>
-      <View style={[s.eye,{left:16}]}><View style={s.pupil}/></View>
-      <View style={[s.eye,{right:16}]}><View style={s.pupil}/></View>
-      <View style={s.gMuzzle}><View style={s.gNose}/><Text style={s.smile}>⌣</Text></View>
-    </View>
-  </>;
-}
-
-const s=StyleSheet.create({
-  canvas:{width:96,height:96,position:'relative',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'},
-  tHead:{position:'absolute',left:9,top:14,width:78,height:72,borderRadius:36,backgroundColor:colors.orange,borderWidth:3,borderColor:'#6A3314'},
-  tEar:{position:'absolute',width:28,height:28,borderRadius:14,backgroundColor:colors.orange,borderWidth:3,borderColor:'#6A3314',top:8,zIndex:0},tEarL:{left:8},tEarR:{right:8},
-  stripe:{position:'absolute',width:9,height:19,borderRadius:5,backgroundColor:'#2C241F'},
-  eye:{position:'absolute',top:25,width:18,height:20,borderRadius:10,backgroundColor:'#FFF9F1',borderWidth:1,borderColor:'#47372E',alignItems:'center',justifyContent:'center'},pupil:{width:8,height:11,borderRadius:5,backgroundColor:'#17120F'},
-  muzzle:{position:'absolute',bottom:5,left:16,width:42,height:29,borderRadius:18,backgroundColor:'#FFE7C9',alignItems:'center'},nose:{marginTop:4,width:12,height:8,borderRadius:5,backgroundColor:'#7A392A'},smile:{marginTop:-5,fontSize:20,color:'#38261D',fontWeight:'700'},
-  horn:{position:'absolute',width:13,height:36,borderRadius:8,backgroundColor:'#7A5336',top:2,borderWidth:2,borderColor:'#533421',zIndex:0},hornL:{left:22,transform:[{rotate:'-18deg'}]},hornR:{right:22,transform:[{rotate:'18deg'}]},
-  gEar:{position:'absolute',width:33,height:16,borderRadius:10,backgroundColor:'#D78B75',top:31,zIndex:0},gEarL:{left:3,transform:[{rotate:'-18deg'}]},gEarR:{right:3,transform:[{rotate:'18deg'}]},
-  gHead:{position:'absolute',left:12,top:16,width:72,height:74,borderRadius:34,backgroundColor:'#FFF2DF',borderWidth:3,borderColor:'#B58D69'},gMuzzle:{position:'absolute',bottom:6,left:15,width:37,height:27,borderRadius:17,backgroundColor:'#F5D8C4',alignItems:'center'},gNose:{marginTop:4,width:10,height:7,borderRadius:5,backgroundColor:'#8B5D54'},tuft:{position:'absolute',top:-8,left:28,width:14,height:20,borderRadius:8,backgroundColor:'#FFF2DF',transform:[{rotate:'12deg'}]},
-});
