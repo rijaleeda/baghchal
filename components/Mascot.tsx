@@ -1,8 +1,52 @@
-import { Image, StyleSheet, View } from 'react-native';
-
-const TIGER='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAABgFBMVEX159f217T6lSkOBAMrFxH3hhryiSb89OXtyqjnuJDv28Xvw5nSqofrehk4IxtNKBbLh1D17eJNOCzQZyZwNxfRdynPmGzqeCbrqm6uZSr+ozQiDQjXxrHXo3f2pVH+8tdrV0qwVRjLuqccEhKORhjRaBiOeGesmYayeUy3ppVsSC+OViymiXDXspGYg3L0tHHsmkxXRTluKAyPa1H9kh2IOBCwk3nGekTXhTT+4rw4KSSmSRWsWiS7dDR3ZVbHWRvnhkZWMhriaitFGwtCLiSJSiXFXSFsUTnYdBt7QxyTc1rVk13gq4F7bGGaUx2XYTGYjoK5YRu3hVdfU0pjPSNkTkF8c2uckoXJjGTd0sHmnmP9sVdWSUGHXkKsTSOjakmgjYC4q6O8sKDcz8Df0b/iaxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABC/dFAAAAgHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgMxpgAAAfWSURBVHja7Vjnetu4EgWIQoBFpFgkUr13Wc2S3B13p5ctd8vt5f1f4Q7otpGZOPk2PzO2ZYsiD2bOzBwMjNB3+25fb7quZ78FjNHf6pb0Pw/UcSgt0tqvfxaqRjNOJkPJXulrw/vofn1BHUAhhJKMkf0MiY/9NSY4i4y7O6Iz5Y1z5QHWkf4pmMZoq2t89ClGqMJkxJ/d+JXFbQo4g+lELsCnRiqS3phRsPOth0uCc22qaZyxyMQGymaRtk9pk7qRKXaPCKmlAel9SoBGIKB2G3sW4YqmhfEgDON6O9QKFSntA3BkEFkCYwH3G2n+UEUhyQAFB0AKyhrydx4Pnw8pdcAJmvlxGDI7XwegOJImxqhGSD/FpXOVhxPlVcbhAmAKvKVCbQIpPx5yzsM45hrPtwhxJZYAtEVI9xGQ3iVNspCR6ymkNpdT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';
-const GOAT='data:image/png;base64,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';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors } from '../theme';
 
 type Props={animal:'tiger'|'goat';size?:number};
-export function Mascot({animal,size=96}:Props){return <View style={{width:size,height:size}}><Image source={{uri:animal==='tiger'?TIGER:GOAT}} style={[s.image,{width:size,height:size}]} resizeMode="contain"/></View>}
-const s=StyleSheet.create({image:{backgroundColor:'transparent'}});
+
+export function Mascot({animal,size=96}:Props){
+  const scale=size/96;
+  return <View style={{width:size,height:size,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}>
+    <View style={[s.canvas,{transform:[{scale}]}]}>
+      {animal==='tiger'?<Tiger/>:<Goat/>}
+    </View>
+  </View>;
+}
+
+function Tiger(){
+  return <>
+    <View style={[s.tEar,s.tEarL]}/><View style={[s.tEar,s.tEarR]}/>
+    <View style={s.tHead}>
+      <View style={[s.stripe,{top:7,left:34}]}/>
+      <View style={[s.stripe,{top:13,left:22,transform:[{rotate:'-24deg'}]}]}/>
+      <View style={[s.stripe,{top:13,right:22,transform:[{rotate:'24deg'}]}]}/>
+      <View style={[s.eye,{left:16}]}><View style={s.pupil}/></View>
+      <View style={[s.eye,{right:16}]}><View style={s.pupil}/></View>
+      <View style={s.muzzle}><View style={s.nose}/><Text style={s.smile}>⌣</Text></View>
+    </View>
+  </>;
+}
+
+function Goat(){
+  return <>
+    <View style={[s.horn,s.hornL]}/><View style={[s.horn,s.hornR]}/>
+    <View style={[s.gEar,s.gEarL]}/><View style={[s.gEar,s.gEarR]}/>
+    <View style={s.gHead}>
+      <View style={s.tuft}/>
+      <View style={[s.eye,{left:16}]}><View style={s.pupil}/></View>
+      <View style={[s.eye,{right:16}]}><View style={s.pupil}/></View>
+      <View style={s.gMuzzle}><View style={s.gNose}/><Text style={s.smile}>⌣</Text></View>
+    </View>
+  </>;
+}
+
+const s=StyleSheet.create({
+  canvas:{width:96,height:96,position:'relative',alignItems:'center',justifyContent:'center',backgroundColor:'transparent'},
+  tHead:{position:'absolute',left:9,top:14,width:78,height:72,borderRadius:36,backgroundColor:colors.orange,borderWidth:3,borderColor:'#6A3314'},
+  tEar:{position:'absolute',width:28,height:28,borderRadius:14,backgroundColor:colors.orange,borderWidth:3,borderColor:'#6A3314',top:8,zIndex:0},tEarL:{left:8},tEarR:{right:8},
+  stripe:{position:'absolute',width:9,height:19,borderRadius:5,backgroundColor:'#2C241F'},
+  eye:{position:'absolute',top:25,width:18,height:20,borderRadius:10,backgroundColor:'#FFF9F1',borderWidth:1,borderColor:'#47372E',alignItems:'center',justifyContent:'center'},pupil:{width:8,height:11,borderRadius:5,backgroundColor:'#17120F'},
+  muzzle:{position:'absolute',bottom:5,left:16,width:42,height:29,borderRadius:18,backgroundColor:'#FFE7C9',alignItems:'center'},nose:{marginTop:4,width:12,height:8,borderRadius:5,backgroundColor:'#7A392A'},smile:{marginTop:-5,fontSize:20,color:'#38261D',fontWeight:'700'},
+  horn:{position:'absolute',width:13,height:36,borderRadius:8,backgroundColor:'#7A5336',top:2,borderWidth:2,borderColor:'#533421',zIndex:0},hornL:{left:22,transform:[{rotate:'-18deg'}]},hornR:{right:22,transform:[{rotate:'18deg'}]},
+  gEar:{position:'absolute',width:33,height:16,borderRadius:10,backgroundColor:'#D78B75',top:31,zIndex:0},gEarL:{left:3,transform:[{rotate:'-18deg'}]},gEarR:{right:3,transform:[{rotate:'18deg'}]},
+  gHead:{position:'absolute',left:12,top:16,width:72,height:74,borderRadius:34,backgroundColor:'#FFF2DF',borderWidth:3,borderColor:'#B58D69'},gMuzzle:{position:'absolute',bottom:6,left:15,width:37,height:27,borderRadius:17,backgroundColor:'#F5D8C4',alignItems:'center'},gNose:{marginTop:4,width:10,height:7,borderRadius:5,backgroundColor:'#8B5D54'},tuft:{position:'absolute',top:-8,left:28,width:14,height:20,borderRadius:8,backgroundColor:'#FFF2DF',transform:[{rotate:'12deg'}]},
+});
